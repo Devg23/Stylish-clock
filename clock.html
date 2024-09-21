@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Stylish Clock</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/originals/32/d7/6b/32d76bda14ee5e1dc93bdf36a6d2e46d.gif');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #circle {
+            text-align: center;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(173,141,237,1) 100%);
+            border: 10px solid rgba(224, 117, 241, 0.6);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2), 0 15px 30px rgba(224,117,241,0.4);
+            padding: 180px 0;
+            width: 400px;
+            height: 400px;
+            font-size: 100px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        #circle::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-radius: 50%;
+            border: 10px solid rgba(173, 141, 237, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        #clock {
+            color: rgb(126, 164, 241);
+            text-shadow: 2px 2px 8px rgba(173, 141, 237, 0.8);
+            font-size: 80px;
+        }
+    </style>
+    <body>
+        <div id="circle">
+            <div id="clock"></div>
+        </div>
+
+        <script>
+            function currentTime() {
+                let date = new Date(); 
+                let hh = date.getHours();
+                let mm = date.getMinutes();
+                let ss = date.getSeconds();
+                let session = "AM";
+              
+                if(hh == 0){
+                    hh = 12;
+                }
+                if(hh > 12){
+                    hh = hh - 12;
+                    session = "PM";
+             }
+          
+             hh = (hh < 10) ? "0" + hh : hh;
+             mm = (mm < 10) ? "0" + mm : mm;
+             ss = (ss < 10) ? "0" + ss : ss;
+              
+             let time = hh + ":" + mm + ":" + ss + " " + session;
+          
+            document.getElementById("clock").innerText = time; 
+            let t = setTimeout(function(){ currentTime() }, 1000);
+          }
+          currentTime();
+          </script>
+    </body>
+</html>
